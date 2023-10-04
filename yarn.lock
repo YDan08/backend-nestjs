@@ -808,6 +808,23 @@
     picocolors "^1.0.0"
     tslib "^2.6.0"
 
+"@prisma/client@^5.4.0":
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-5.4.0.tgz#216eddccc38c5eb56febcb781a273b7bd55ded5f"
+  integrity sha512-JEo7J24OgEyNJg6hWRecIj6NJcB0chBCXFhWoO5exDVReMxiaY801lLLd6KStVFJHCWVEWoMLPUqhOvQA5MUuw==
+  dependencies:
+    "@prisma/engines-version" "5.4.0-47.a5596b96668f0f4b397761ce0956db54e17e48c4"
+
+"@prisma/engines-version@5.4.0-47.a5596b96668f0f4b397761ce0956db54e17e48c4":
+  version "5.4.0-47.a5596b96668f0f4b397761ce0956db54e17e48c4"
+  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-5.4.0-47.a5596b96668f0f4b397761ce0956db54e17e48c4.tgz#4a7ff7465c05f8e4bbfdcc41c9972e158010fd15"
+  integrity sha512-liWWFhIL5hMhVt4f9HWqMSnBgVicVFGKsEzO5gBfLr9aG1JgjjMDYNmqqLji0Hp0VpD8ffTQTOVZDJRUVBD4dw==
+
+"@prisma/engines@5.4.0":
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-5.4.0.tgz#9725f703a2b64a5f3a0a7070e558cf5fabcf5f49"
+  integrity sha512-tnPa5Z1D70iPahvy9xG0bH5GD6Pb25Q+rH76+N1JKwQFe6vA3LyKyVzQrG4CQCI6N5PCJHJxlahJeCgcTJfLsg==
+
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
@@ -4043,6 +4060,13 @@ pretty-format@^29.0.0, pretty-format@^29.7.0:
     "@jest/schemas" "^29.6.3"
     ansi-styles "^5.0.0"
     react-is "^18.0.0"
+
+prisma@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-5.4.0.tgz#2f0decabed43d91c93247a199c10733ca2215e0a"
+  integrity sha512-69rlao0RJ4JcLnJ6VwUS89qhRAdMawby7u10OOkpxZC9RZkDdLIpMj+7zafH2NqEk9roplbmfiAR5FseR7H8fg==
+  dependencies:
+    "@prisma/engines" "5.4.0"
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
