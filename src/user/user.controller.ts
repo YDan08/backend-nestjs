@@ -8,7 +8,6 @@ import {
   Delete,
   Patch,
   ParseIntPipe,
-  NotFoundException,
   UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
@@ -42,8 +41,6 @@ export class UserController {
     @Body() data: UpdatePutUserDTO,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    await this.exists(id);
-
     return this.userService.update(data, id);
   }
 
@@ -52,21 +49,11 @@ export class UserController {
     @Body() data: UpdatePatchUserDTO,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    await this.exists(id);
-
     return this.userService.updatePartial(data, id);
   }
 
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number) {
-    await this.exists(id);
-
     return this.userService.delete(id);
-  }
-
-  async exists(id: number) {
-    if (!(await this.findById(id))) {
-      throw new NotFoundException('O usuario não existe');
-    }
   }
 }
