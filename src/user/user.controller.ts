@@ -8,47 +8,65 @@ import {
   Delete,
   Patch,
   ParseIntPipe,
+  NotFoundException,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdatePutUserDTO } from './dto/update-put-user.dto';
 import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
+import { UserService } from './user.service';
+import { LogInterceptor } from 'src/interceptors/log.interceptor';
 
+@UseInterceptors(LogInterceptor)
 @Controller('users')
 export class UserController {
+  constructor(private readonly userService: UserService) {}
+
   @Post()
-  async create(@Body() { name, email, password }: CreateUserDTO) {
-    return { name, email, password };
+  async create(@Body() data: CreateUserDTO) {
+    return this.userService.create(data);
   }
+
   @Get()
   async list() {
-    return { users: [] };
+    return this.userService.list();
   }
 
   @Get(':id')
-  async listById(@Param('id', ParseIntPipe) id: number) {
-    return { user: {}, id };
+  async findById(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.findById(id);
   }
 
   @Put(':id')
   async update(
-    @Body() { email, name, password }: UpdatePutUserDTO,
+    @Body() data: UpdatePutUserDTO,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return { method: 'put', email, name, password, id };
+    await this.exists(id);
+
+    return this.userService.update(data, id);
   }
 
   @Patch(':id')
   async updatePartial(
-    @Body() { email, name, password }: UpdatePatchUserDTO,
+    @Body() data: UpdatePatchUserDTO,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return { method: 'patch', email, name, password, id };
+    await this.exists(id);
+
+    return this.userService.updatePartial(data, id);
   }
 
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number) {
-    return {
-      id,
-    };
+    await this.exists(id);
+
+    return this.userService.delete(id);
+  }
+
+  async exists(id: number) {
+    if (!(await this.findById(id))) {
+      throw new NotFoundException('O usuario não existe');
+    }
   }
 }
