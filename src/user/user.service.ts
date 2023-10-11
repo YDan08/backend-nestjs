@@ -53,6 +53,10 @@ export class UserService {
       dataUpdate.password = data.password;
     }
 
+    if (data.role) {
+      dataUpdate.role = data.role;
+    }
+
     return this.prisma.user.update({ data: dataUpdate, where: { id } });
   }
 
